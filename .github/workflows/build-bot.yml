@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       bot_version:
-        description: 'Versie van de bot (bijv. 1.0.0)'
+        description: 'Versie van de bot'
         required: true
         default: '1.0.0'
 
@@ -21,7 +21,12 @@ jobs:
         mkdir -Force "C:\MijnTradingBot"
         xcopy . "C:\MijnTradingBot" /E /H /Y
 
-    - name: De Tradingbot opstarten
+    - name: Installeer benodigde bibliotheken
+      run: |
+        cd "C:\MijnTradingBot"
+        if (Test-Path requirements.txt) { python -m pip install -r requirements.txt }
+
+    - name: De Echte Tradingbot opstarten
       run: |
         cd "C:\MijnTradingBot"
         start cmd /k "python main.py"
