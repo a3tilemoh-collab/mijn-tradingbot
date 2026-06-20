@@ -24,4 +24,4 @@ jobs:
     - name: De Echte Tradingbot opstarten
       run: |
         cd "C:\MijnTradingBot"
-        start cmd /k "python main.py"
+        Start-Process cmd -ArgumentList '/k', 'python main.py'
