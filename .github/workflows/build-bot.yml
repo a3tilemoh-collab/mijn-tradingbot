@@ -1,4 +1,4 @@
-name: Handmatige Bot Builder (Op MSI Laptop)
+name: Handmatige Bot Builder & Starter
 
 on:
   workflow_dispatch:
@@ -10,14 +10,18 @@ on:
 
 jobs:
   build:
-    # Dit zorgt ervoor dat de opdracht op JOUW laptop wordt uitgevoerd:
     runs-on: self-hosted 
 
     steps:
     - name: Code ophalen
       uses: actions/checkout@v4
 
-    - name: Map aanmaken voor de bot
+    - name: Map aanmaken en code kopiëren
       run: |
         mkdir -Force "C:\MijnTradingBot"
         xcopy . "C:\MijnTradingBot" /E /H /Y
+
+    - name: De Tradingbot opstarten
+      run: |
+        cd "C:\MijnTradingBot"
+        start cmd /k "python main.py"
